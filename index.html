@@ -28,25 +28,24 @@
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="container">
-      <p class="marker">A field guide — est. 2026</p>
+      <p class="marker">A field guide — est. 2026 · © 2026 Fahad Noor</p>
       <h1 class="headline">Stop hitting the <span class="emph">200k wall</span>.</h1>
       <p class="subhead">
         A field guide to running heavy Claude Code sessions without losing context — or your sanity.
-        Written by a paid Claude Max user who lived it.
       </p>
 
-      <form class="signup" action="https://buttondown.email/api/emails/embed-subscribe/REPLACE_ME" method="post" target="popupwindow">
-        <label for="email" class="sr-only">Email address</label>
-        <input id="email" name="email" type="email" required placeholder="you@work.com" autocomplete="email" />
-        <button type="submit">Get notified when it ships</button>
-      </form>
-      <p class="trust">No spam. One launch email. Unsubscribe in one click.</p>
+      <p class="cta-wrap">
+        <a class="cta-btn" href="mailto:fahad.mnoor97@gmail.com?subject=Notify%20me%20%E2%80%94%20Under%20200k&body=Put%20me%20on%20the%20launch%20list.">
+          Get notified when it ships
+        </a>
+      </p>
+      <p class="trust">Pre-launch. One launch email, no newsletter. Opens your email client.</p>
     </div>
   </section>
 
   <hr class="rule" />
 
-  <!-- ============ PROOF ============ -->
+  <!-- ============ PROOF (honest) ============ -->
   <section class="proof">
     <div class="container">
       <p class="marker">The signal you don't have yet</p>
@@ -57,11 +56,15 @@
 
       <div class="statusline-stack">
         <img src="assets/statusline-live.svg"
-             alt="A live status line ticking from 32% green to 78% yellow to 91% red over 4 seconds."
+             alt="A status line demo showing the three color states: 32% green, 78% yellow, 91% red, cycling every 4 seconds."
              width="880" height="72" />
       </div>
 
-      <p class="caption">That's the real output. Not a mockup.</p>
+      <p class="caption">
+        Demo of the three states. The underlying data —
+        <code>context_window.used_percentage</code> — is read from the Claude Code
+        statusLine stdin schema (verified by grepping the installed binary, not the docs).
+      </p>
     </div>
   </section>
 
@@ -70,36 +73,36 @@
   <!-- ============ WHAT'S INSIDE ============ -->
   <section class="inside">
     <div class="container">
-      <p class="marker">What you'll learn</p>
-      <h2 class="h2">Four moves that change every session.</h2>
+      <p class="marker">What the playbook covers</p>
+      <h2 class="h2">Four moves, each grounded in something specific.</h2>
 
       <ol class="promises">
         <li>
           <span class="num">I.</span>
           <div>
-            <h3>Run a context audit in 90 seconds.</h3>
-            <p>A component-by-component breakdown of where your tokens actually go — and the two moves that reclaim most of them.</p>
+            <h3>A context audit you can run in under two minutes.</h3>
+            <p>Walk every component that eats tokens — messages, MCP connectors, skills, agents, hooks, system prompt — and learn which two typically hide the most bloat.</p>
           </div>
         </li>
         <li>
           <span class="num">II.</span>
           <div>
-            <h3>Prune MCP sprawl at the real source.</h3>
-            <p>Why 60k+ tokens of connector schemas load before you type a word, and the one setting that kills it. Hint: it's not in <code>settings.json</code>.</p>
+            <h3>Where MCP sprawl actually lives.</h3>
+            <p>If your local <code>settings.json</code> looks clean but you're still loading 60k+ tokens before typing, the culprit is browser-side. The playbook names the exact setting and where to click.</p>
           </div>
         </li>
         <li>
           <span class="num">III.</span>
           <div>
-            <h3>Enforce a response protocol that pays rent.</h3>
-            <p>A Stop-hook–enforced editorial standard that keeps every response teaching, self-critiquing, and proposing next moves — no drift.</p>
+            <h3>A response protocol enforced by a Stop-hook.</h3>
+            <p>Five mandatory sections per response — including a "harshest critic" block and tagged next-move paths. The playbook gives the template, the hook script, and the reason each section exists.</p>
           </div>
         </li>
         <li>
           <span class="num">IV.</span>
           <div>
             <h3>Verify the binary, not the docs.</h3>
-            <p>A sixty-second grep pattern that has already saved dozens of hours by finding schema fields the public docs didn't mention.</p>
+            <p>A sixty-second grep pattern on any installed CLI (Claude Code, gh, pip packages). The playbook walks a real example: finding <code>context_window.used_percentage</code> in <code>cli.js</code> — a field the public docs don't mention.</p>
           </div>
         </li>
       </ol>
@@ -122,23 +125,43 @@
 
   <hr class="rule" />
 
+  <!-- ============ HONEST STATUS ============ -->
+  <section class="status">
+    <div class="container">
+      <p class="marker">Where this actually is</p>
+      <h2 class="h2">Pre-launch. Here's what exists today.</h2>
+      <ul class="status-list">
+        <li><span class="status-check">✓</span> The statusline itself — shipped, reading real <code>context_window</code> fields from the bundled CLI.</li>
+        <li><span class="status-check">✓</span> The response-protocol Stop-hook — running on every session on my personal setup.</li>
+        <li><span class="status-check">✓</span> The audit methodology — used on my own work, not yet written down.</li>
+        <li><span class="status-dash">—</span> The written playbook — in draft, not yet a deliverable PDF.</li>
+        <li><span class="status-dash">—</span> Pricing, marketplace listing, launch date — all TBD.</li>
+      </ul>
+      <p class="status-foot">
+        If you sign up, you'll get exactly one email — on the day there's something real to hand over. Not a newsletter, not a drip campaign.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
   <!-- ============ SECOND CTA ============ -->
   <section class="cta-repeat">
     <div class="container">
-      <h2 class="h2">Drop your email. Get one note when it ships.</h2>
-      <form class="signup" action="https://buttondown.email/api/emails/embed-subscribe/REPLACE_ME" method="post" target="popupwindow">
-        <label for="email2" class="sr-only">Email address</label>
-        <input id="email2" name="email" type="email" required placeholder="you@work.com" autocomplete="email" />
-        <button type="submit">Notify me</button>
-      </form>
-      <p class="trust">No spam. No newsletter. One email.</p>
+      <h2 class="h2">Get one note when it ships.</h2>
+      <p class="cta-wrap">
+        <a class="cta-btn" href="mailto:fahad.mnoor97@gmail.com?subject=Notify%20me%20%E2%80%94%20Under%20200k&body=Put%20me%20on%20the%20launch%20list.">
+          Notify me
+        </a>
+      </p>
+      <p class="trust">Opens your email client. One launch email, nothing else.</p>
     </div>
   </section>
 
   <!-- ============ FOOTER ============ -->
   <footer>
     <div class="container">
-      <p>© 2026 · A field guide in progress · Built while running 23 heavy sessions.</p>
+      <p>© 2026 Fahad Noor · A field guide in progress.</p>
     </div>
   </footer>
 
