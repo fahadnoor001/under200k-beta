@@ -1,0 +1,17 @@
+.env
+.env.*
+node_modules/
+
+# Local dev-only Claude Code launch config
+.claude/launch.json
+.DS_Store
+Thumbs.db
+
+# Demo video — too big for git, host on Loom/YouTube instead
+assets/demo.mp4
+assets/demo.mov
+assets/demo-raw.*
+
+# Local-only notes
+NOTES.local.md
+*.draft.md

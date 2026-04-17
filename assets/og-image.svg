@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-labelledby="ogtitle">
+  <title id="ogtitle">Under 200k — a field guide to heavy Claude Code sessions.</title>
+  <style>
+    .bg       { fill: #F5F1EB; }
+    .marker   { font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif; font-size: 18px; fill: #8A8A8A; letter-spacing: 3.24px; }
+    .display  { font-family: 'Playfair Display', Georgia, serif; font-weight: 300; font-size: 112px; fill: #1A1A1A; }
+    .emph     { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 400; fill: #1A1A1A; }
+    .mono     { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 32px; fill: #1A1A1A; }
+    .sep      { fill: #8A8A8A; }
+    .sign     { font-family: 'Inter', -apple-system, sans-serif; font-size: 18px; fill: #5A5A5A; letter-spacing: 0.5px; }
+    .panel    { fill: #FAF8F3; }
+  </style>
+
+  <rect class="bg" width="1200" height="630" />
+
+  <!-- Marker -->
+  <text class="marker" x="80" y="110">A FIELD GUIDE — EST. 2026</text>
+
+  <!-- Headline -->
+  <text class="display" x="80" y="260">Stop hitting the</text>
+  <text class="display" x="80" y="380">
+    <tspan class="emph">200k wall</tspan><tspan>.</tspan>
+  </text>
+
+  <!-- Statusline panel -->
+  <rect class="panel" x="80" y="440" width="1040" height="80" />
+  <rect x="80" y="440" width="8" height="80" fill="#A13A2F" />
+  <text class="mono" x="116" y="490">Opus 4.7</text>
+  <text class="sep mono" x="260" y="490">|</text>
+  <text class="mono" x="288" y="490">workspace</text>
+  <text class="sep mono" x="472" y="490">|</text>
+  <text class="mono" x="500" y="490">🔴 91%</text>
+  <text class="sep mono" x="636" y="490">|</text>
+  <text class="mono" x="664" y="490">$5.100</text>
+
+  <!-- Sign-off -->
+  <text class="sign" x="80" y="580">under200k — the field guide</text>
+</svg>
