@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 480" width="560" height="480" role="img" aria-labelledby="cbtitle">
+  <title id="cbtitle">Context window breakdown: 160.8k of 200k used (80%), dominated by messages and deferred MCP tools.</title>
+  <style>
+    .panel    { fill: #1F1F1F; }
+    .head     { fill: #2A2A2A; }
+    .label    { font-family: 'Inter', -apple-system, sans-serif; font-size: 14px; fill: #EDE8E0; }
+    .label-d  { fill: #9A9A9A; }
+    .muted    { font-family: 'Inter', sans-serif; font-size: 14px; fill: #9A9A9A; }
+    .num      { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; fill: #EDE8E0; text-anchor: end; }
+    .num-d    { fill: #9A9A9A; }
+    .pct      { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; fill: #9A9A9A; text-anchor: end; }
+    .dot-on   { fill: #6B8AFF; }
+    .dot-off  { fill: none; stroke: #9A9A9A; stroke-width: 1.2; }
+    .bar-bg   { fill: #2A2A2A; }
+    .bar-fill { fill: #6B8AFF; }
+    .foot     { font-family: 'Inter', sans-serif; font-size: 12px; fill: #8A8A8A; }
+    .redact   { fill: #3A3A3A; }
+  </style>
+
+  <!-- Panel -->
+  <rect class="panel" width="560" height="480" rx="8" />
+
+  <!-- Header -->
+  <rect class="head" x="0" y="0" width="560" height="52" rx="8" />
+  <rect class="head" x="0" y="44" width="560" height="8" />
+  <text class="label" x="20" y="32">Context window</text>
+  <text class="num" x="540" y="32">160.8k / 200.0k (80%)</text>
+
+  <!-- Progress bar -->
+  <rect class="bar-bg" x="20" y="62" width="520" height="4" rx="2" />
+  <rect class="bar-fill" x="20" y="62" width="416" height="4" rx="2" />
+
+  <!-- Rows -->
+  <g transform="translate(20, 90)">
+    <!-- Messages -->
+    <rect class="dot-on" x="0" y="2" width="10" height="10" rx="1.5" />
+    <text class="label" x="22" y="12">Messages</text>
+    <text class="num" x="440" y="12">119.8k</text>
+    <text class="pct" x="520" y="12">59.9%</text>
+
+    <!-- Skills -->
+    <rect class="dot-on" x="0" y="28" width="10" height="10" rx="1.5" />
+    <text class="label" x="22" y="38">Skills</text>
+    <text class="num" x="440" y="38">16.3k</text>
+    <text class="pct" x="520" y="38">8.1%</text>
+
+    <!-- Memory files -->
+    <rect class="dot-on" x="0" y="54" width="10" height="10" rx="1.5" />
+    <text class="label" x="22" y="64">Memory files</text>
+    <text class="num" x="440" y="64">11.7k</text>
+    <text class="pct" x="520" y="64">5.8%</text>
+
+    <!-- System prompt -->
+    <rect class="dot-on" x="0" y="80" width="10" height="10" rx="1.5" />
+    <text class="label" x="22" y="90">System prompt</text>
+    <text class="num" x="440" y="90">9.0k</text>
+    <text class="pct" x="520" y="90">4.5%</text>
+
+    <!-- System tools -->
+    <rect class="dot-on" x="0" y="106" width="10" height="10" rx="1.5" />
+    <text class="label" x="22" y="116">System tools</text>
+    <text class="num" x="440" y="116">7.9k</text>
+    <text class="pct" x="520" y="116">4.0%</text>
+
+    <!-- Custom agents -->
+    <rect class="dot-on" x="0" y="132" width="10" height="10" rx="1.5" />
+    <text class="label" x="22" y="142">Custom agents</text>
+    <text class="num" x="440" y="142">7.1k</text>
+    <text class="pct" x="520" y="142">3.6%</text>
+
+    <!-- MCP tools -->
+    <rect class="dot-on" x="0" y="158" width="10" height="10" rx="1.5" />
+    <text class="label" x="22" y="168">MCP tools</text>
+    <text class="num" x="440" y="168">3.0k</text>
+    <text class="pct" x="520" y="168">1.5%</text>
+
+    <!-- MCP tools (deferred) - the story -->
+    <rect class="dot-off" x="0" y="184" width="10" height="10" rx="1.5" />
+    <text class="label label-d" x="22" y="194">MCP tools (deferred)</text>
+    <text class="num num-d" x="440" y="194">115.2k</text>
+    <text class="pct" x="520" y="194">57.6%</text>
+
+    <!-- System tools (deferred) -->
+    <rect class="dot-off" x="0" y="210" width="10" height="10" rx="1.5" />
+    <text class="label label-d" x="22" y="220">System tools (deferred)</text>
+    <text class="num num-d" x="440" y="220">17.7k</text>
+    <text class="pct" x="520" y="220">8.8%</text>
+
+    <!-- Autocompact buffer -->
+    <rect class="dot-off" x="0" y="236" width="10" height="10" rx="1.5" />
+    <text class="label label-d" x="22" y="246">Autocompact buffer</text>
+    <text class="num num-d" x="440" y="246">33.0k</text>
+    <text class="pct" x="520" y="246">16.5%</text>
+
+    <!-- Free space -->
+    <rect class="dot-off" x="0" y="262" width="10" height="10" rx="1.5" />
+    <text class="label label-d" x="22" y="272">Free space</text>
+    <text class="num num-d" x="440" y="272">0</text>
+    <text class="pct" x="520" y="272">0.0%</text>
+
+    <!-- Redacted drilldown rows (personal scope) -->
+    <text class="muted" x="0" y="300">Drilldowns (personal setup — redacted):</text>
+    <rect class="redact" x="0" y="312" width="520" height="14" rx="2" />
+    <rect class="redact" x="0" y="334" width="520" height="14" rx="2" />
+    <rect class="redact" x="0" y="356" width="520" height="14" rx="2" />
+  </g>
+</svg>

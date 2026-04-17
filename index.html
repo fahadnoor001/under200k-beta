@@ -65,6 +65,17 @@
         <code>context_window.used_percentage</code> — is read from the Claude Code
         statusLine stdin schema (verified by grepping the installed binary, not the docs).
       </p>
+
+      <div class="statusline-stack" style="margin-top:24px;">
+        <img src="assets/context-breakdown.svg"
+             alt="A real Claude Code context window at 80% — 160.8k of 200k used. Messages and deferred MCP tools dominate. Personal-scope drilldowns redacted."
+             width="560" height="480"
+             style="max-width:560px;margin:0 auto;" />
+      </div>
+      <p class="caption">
+        Real session, 80% full. Top-level breakdown shown; drilldowns (tool counts, agent names, memory file list) redacted — personal scope.
+        The story: <code>MCP tools (deferred)</code> at 57.6% is where the bloat lives.
+      </p>
     </div>
   </section>
 
