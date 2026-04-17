@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-labelledby="thumbtitle">
+  <title id="thumbtitle">Under 200k — a field guide to heavy Claude Code sessions.</title>
+  <style>
+    .bg     { fill: #F5F1EB; }
+    .ink    { fill: #1A1A1A; }
+    .dim    { fill: #5A5A5A; }
+    .muted  { fill: #8A8A8A; }
+    .red    { fill: #A13A2F; }
+    .serif  { font-family: 'Playfair Display', Georgia, serif; }
+    .sans   { font-family: 'Inter', -apple-system, sans-serif; }
+    .mono   { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  </style>
+
+  <!-- Background -->
+  <rect class="bg" width="600" height="600"/>
+
+  <!-- Top marker -->
+  <text class="sans muted" x="50" y="68" font-size="13" letter-spacing="3">A FIELD GUIDE — EST. 2026</text>
+
+  <!-- Hairline rule -->
+  <line x1="50" y1="90" x2="550" y2="90" stroke="#1A1A1A" stroke-opacity="0.12" stroke-width="1"/>
+
+  <!-- Main mark: 200k -->
+  <text class="serif ink" x="50" y="290" font-size="160" font-weight="300" letter-spacing="-6">200k</text>
+  <!-- Red slash through -->
+  <line x1="40" y1="310" x2="430" y2="200" stroke="#A13A2F" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Subhead -->
+  <text class="serif ink" x="50" y="360" font-size="36" font-weight="300">
+    Stop hitting
+  </text>
+  <text class="serif ink" x="50" y="400" font-size="36" font-style="italic" font-weight="400">
+    the wall.
+  </text>
+
+  <!-- Statusline mini (proof detail) -->
+  <g transform="translate(50, 460)">
+    <rect x="0" y="0" width="500" height="40" fill="#1A1A1A" rx="2"/>
+    <rect x="0" y="0" width="4" height="40" fill="#A13A2F"/>
+    <text class="mono" x="20" y="26" font-size="13" fill="#EDE8E0">Opus 4.7</text>
+    <text class="mono" x="90" y="26" font-size="13" fill="#8A8A8A">|</text>
+    <text class="mono" x="105" y="26" font-size="13" fill="#EDE8E0">workspace</text>
+    <text class="mono" x="195" y="26" font-size="13" fill="#8A8A8A">|</text>
+    <text class="mono" x="210" y="26" font-size="13" fill="#D85A4F">🔴 91%</text>
+    <text class="mono" x="285" y="26" font-size="13" fill="#8A8A8A">|</text>
+    <text class="mono" x="300" y="26" font-size="13" fill="#EDE8E0">$5.100</text>
+  </g>
+
+  <!-- Bottom sign-off -->
+  <line x1="50" y1="535" x2="550" y2="535" stroke="#1A1A1A" stroke-opacity="0.12" stroke-width="1"/>
+  <text class="sans dim" x="50" y="565" font-size="14">under 200k</text>
+  <text class="sans muted" x="550" y="565" font-size="12" text-anchor="end">a field guide in progress</text>
+</svg>
