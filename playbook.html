@@ -146,6 +146,26 @@
       .cover h1 { font-size: 52pt; }
       .cover-sub { font-size: 16pt; }
       .toc { page-break-after: always; }
+      @page {
+        margin: 0.75in;
+        @bottom-right {
+          content: counter(page);
+          font-family: 'Inter', sans-serif;
+          font-size: 9pt;
+          color: #8A8A8A;
+        }
+        @bottom-left {
+          content: "Under 200k";
+          font-family: 'Inter', sans-serif;
+          font-size: 9pt;
+          color: #8A8A8A;
+          letter-spacing: 0.05em;
+        }
+      }
+      @page :first {
+        @bottom-right { content: ""; }
+        @bottom-left { content: ""; }
+      }
     }
     .toc-list { list-style: none; margin: 24px 0 0 0; padding: 0; }
     .toc-list li {
