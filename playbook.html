@@ -145,7 +145,19 @@
       .cover { min-height: 9in; page-break-after: always; }
       .cover h1 { font-size: 52pt; }
       .cover-sub { font-size: 16pt; }
+      .toc { page-break-after: always; }
     }
+    .toc-list { list-style: none; margin: 24px 0 0 0; padding: 0; }
+    .toc-list li {
+      font-family: var(--serif);
+      font-size: 18px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px dotted var(--border);
+      counter-increment: toc;
+    }
+    .toc-list li a { text-decoration: none; color: var(--ink); display: flex; gap: 12px; }
+    .toc-list li em { color: var(--text-2); font-style: italic; min-width: 110px; font-size: 14px; font-family: var(--sans); letter-spacing: 0.04em; text-transform: uppercase; padding-top: 4px; }
   </style>
 </head>
 <body>
@@ -158,15 +170,32 @@
   </div>
   <div class="cover-foot">
     <span>Fahad Noor</span>
-    <span>v1.0 · 2026</span>
+    <span>v1.0 · 2026-04-18</span>
   </div>
+</section>
+
+<div class="page-break"></div>
+
+<section class="toc">
+  <h2 style="margin-top:0;">Contents</h2>
+  <ol class="toc-list">
+    <li><a href="#why">Why this exists</a></li>
+    <li><a href="#how">How to use this guide</a></li>
+    <li><a href="#ch1"><em>Chapter I.</em> A context audit you can run in under two minutes</a></li>
+    <li><a href="#ch2"><em>Chapter II.</em> Where MCP sprawl actually lives</a></li>
+    <li><a href="#ch3"><em>Chapter III.</em> A response protocol enforced by a Stop-hook</a></li>
+    <li><a href="#ch4"><em>Chapter IV.</em> Verify the binary, not the docs</a></li>
+    <li><a href="#appA"><em>Appendix A.</em> The statusline script</a></li>
+    <li><a href="#appB"><em>Appendix B.</em> The Stop-hook script</a></li>
+    <li><a href="#closing">Closing</a></li>
+  </ol>
 </section>
 
 <div class="page-break"></div>
 
 <blockquote><p>Copyright © 2026 Fahad Noor. All rights reserved. This document and its scripts are licensed for personal use by the original purchaser. Redistribution, resale, or inclusion in derivative products is prohibited.</p></blockquote>
 
-<h2>Why this exists</h2>
+<h2 id="why">Why this exists</h2>
 <p>You already know what the 200k wall feels like. You're forty turns into a refactor, Claude has the full mental model of your codebase, and somewhere around turn forty-one the context bar goes red. Autocompact triggers. Older messages get summarized into oblivion. The file contents Claude had read earlier? Gone. The design decision you argued out three hours ago? Summarized into one line that loses the reasoning.</p>
 <p>You paste the file again. Claude thanks you and keeps working. But the thing you were building — the specific thread of intent — is now a lossy reconstruction.</p>
 <p>This guide is about not getting there. Not because hitting 200k is a moral failure — it isn't — but because most of the tokens you're burning are noise you never needed to load. The 60k MCP tools you don't use in this session. The skill descriptions that trigger on phrases you never type. The memory files that haven't been relevant for six months. The capabilities index that gets re-injected every turn.</p>
@@ -179,7 +208,7 @@
 </ul>
 <p>The appendix has the two scripts — statusline and Stop-hook — ready to drop into <code>~/.claude/</code>. Together they're about 200 lines.</p>
 
-<h2>How to use this guide</h2>
+<h2 id="how">How to use this guide</h2>
 <p>Read Chapter I today. Run the audit. If you're surprised by what you find (most people are), keep reading.</p>
 <p>Don't skip to the scripts without reading Chapter III. The scripts enforce a protocol that's only useful if you understand why each piece exists — otherwise you'll delete the parts that annoy you and lose the value.</p>
 <p>Every code block is meant to be copied. Every click path is the exact path. If something here doesn't match your version of Claude Code, grep the binary (Chapter IV shows you how) — don't assume I'm wrong until you've checked.</p>
@@ -187,7 +216,7 @@
 <div class="page-break"></div>
 
 <p class="chapter-marker">Chapter I</p>
-<h2>A context audit you can run in under two minutes</h2>
+<h2 id="ch1">A context audit you can run in under two minutes</h2>
 
 <h3>What the context window actually is</h3>
 <p>The 200k token window is a shared budget across eight or nine distinct components. You don't control most of them directly. But every turn, Claude Code sends the model a prompt shaped roughly like this:</p>
@@ -253,7 +282,7 @@
 <div class="page-break"></div>
 
 <p class="chapter-marker">Chapter II</p>
-<h2>Where MCP sprawl actually lives</h2>
+<h2 id="ch2">Where MCP sprawl actually lives</h2>
 
 <h3>The lie of the clean settings.json</h3>
 <p>You open <code>~/.claude/settings.json</code>. It has two or three MCP servers listed. You think you have a small footprint.</p>
@@ -295,7 +324,7 @@
 <div class="page-break"></div>
 
 <p class="chapter-marker">Chapter III</p>
-<h2>A response protocol enforced by a Stop-hook</h2>
+<h2 id="ch3">A response protocol enforced by a Stop-hook</h2>
 
 <h3>Why responses drift</h3>
 <p>The longer a Claude session runs, the more its responses drift toward one of two failure modes:</p>
@@ -382,7 +411,7 @@ chmod +x ~/.claude/hooks/response-protocol.sh
 <div class="page-break"></div>
 
 <p class="chapter-marker">Chapter IV</p>
-<h2>Verify the binary, not the docs</h2>
+<h2 id="ch4">Verify the binary, not the docs</h2>
 
 <h3>Why docs lag</h3>
 <p>Claude Code ships weekly. Documentation ships quarterly. The CLI you installed yesterday has fields, flags, and hook events that don't appear in the public docs yet.</p>
@@ -436,7 +465,7 @@ exceeds_200k_tokens</code></pre>
 <div class="page-break"></div>
 
 <p class="chapter-marker">Appendix A</p>
-<h2>The statusline script</h2>
+<h2 id="appA">The statusline script</h2>
 <p>Drop this at <code>~/.claude/hooks/statusline.sh</code>, make it executable, and register it in <code>settings.json</code> under the <code>statusLine.command</code> key.</p>
 <pre><code>#!/usr/bin/env bash
 # Claude Code statusLine (CLI 2.1.x). Reads session JSON on stdin.
@@ -514,7 +543,7 @@ $ctx = if ($pct -ge 85) { "🔴 $pct%" } elseif ($pct -ge 65) { "🟡 $pct%" } e
 <div class="page-break"></div>
 
 <p class="chapter-marker">Appendix B</p>
-<h2>The Stop-hook script</h2>
+<h2 id="appB">The Stop-hook script</h2>
 <p>Drop this at <code>~/.claude/hooks/response-protocol.sh</code>. The full script:</p>
 <pre><code>#!/usr/bin/env bash
 # Stop hook — Layer A enforcement of the Response Protocol.
@@ -626,7 +655,7 @@ exit 0</code></pre>
 
 <div class="page-break"></div>
 
-<h2>Closing</h2>
+<h2 id="closing">Closing</h2>
 <p>You bought this because you hit a wall that shouldn't exist. It doesn't have to.</p>
 <p>The audit takes 90 seconds. The MCP prune takes 5 minutes. The protocol pays for itself within an hour. The binary-grep pattern is a sixty-second rule you can apply to any CLI tool for the rest of your career.</p>
 <p>If something here doesn't match your experience, grep the binary. Don't email me until you've done the grep — nine times out of ten, the answer is in there and you'll catch a thing the docs got wrong.</p>
