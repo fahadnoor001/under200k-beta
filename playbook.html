@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Under 200k — playbook</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <style>
+    :root {
+      --bg: #FAF8F3;
+      --bg-deep: #F5F1EB;
+      --ink: #1A1A1A;
+      --text: #2A2A2A;
+      --text-2: #5A5A5A;
+      --muted: #8A8A8A;
+      --surface: #EDE8E0;
+      --border: rgba(26,26,26,0.10);
+      --red: #A13A2F;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Inter', -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg-deep); }
+    body {
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--bg);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 56px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; color: var(--ink); letter-spacing: -0.005em; }
+    h1 { font-size: 54px; font-weight: 300; line-height: 1.08; margin-bottom: 14px; }
+    h2 { font-size: 32px; font-weight: 400; margin: 56px 0 18px; line-height: 1.2; }
+    h3 { font-size: 22px; font-weight: 500; margin: 36px 0 12px; }
+    h4 { font-size: 18px; font-weight: 500; margin: 28px 0 10px; font-family: var(--sans); letter-spacing: 0.01em; }
+    p  { margin-bottom: 16px; max-width: 66ch; }
+    ul, ol { margin: 0 0 18px 24px; }
+    li { margin-bottom: 8px; }
+    strong { color: var(--ink); font-weight: 600; }
+    em { font-style: italic; }
+    hr { border: 0; border-top: 1px solid var(--border); margin: 40px 0; }
+    a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--border); }
+    blockquote {
+      border-left: 3px solid var(--red);
+      padding: 8px 18px;
+      color: var(--text-2);
+      margin: 20px 0;
+      background: var(--surface);
+      font-style: italic;
+    }
+    blockquote p { margin: 0; }
+    code {
+      font-family: var(--mono);
+      font-size: 0.9em;
+      background: var(--surface);
+      padding: 2px 6px;
+      border-radius: 2px;
+      color: var(--ink);
+    }
+    pre {
+      background: #1A1A1A;
+      color: #EDE8E0;
+      padding: 18px 20px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.65;
+      margin: 18px 0 24px;
+    }
+    pre code { background: transparent; padding: 0; color: inherit; font-size: inherit; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    th { font-family: var(--sans); font-weight: 600; color: var(--ink); background: var(--surface); }
+
+    /* Cover */
+    .cover {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 0 60px;
+    }
+    .cover-mark {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .cover h1 {
+      font-size: 72px;
+      font-weight: 300;
+      line-height: 1.02;
+      margin-top: 36px;
+    }
+    .cover .emph { font-style: italic; font-weight: 400; }
+    .cover-sub {
+      font-size: 22px;
+      color: var(--text-2);
+      font-family: var(--serif);
+      font-style: italic;
+      margin-top: 20px;
+      max-width: 36ch;
+    }
+    .cover-foot {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+    .chapter-marker {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    /* Print */
+    @media print {
+      @page { size: letter; margin: 0.75in 0.85in; }
+      html, body { background: white; }
+      body { padding: 0; max-width: none; font-size: 11.5pt; line-height: 1.55; }
+      h1 { font-size: 34pt; }
+      h2 { font-size: 20pt; margin: 28pt 0 10pt; page-break-after: avoid; }
+      h3 { font-size: 14pt; page-break-after: avoid; }
+      h4 { font-size: 12pt; page-break-after: avoid; }
+      pre { font-size: 9pt; page-break-inside: avoid; }
+      table, blockquote, pre, ul, ol { page-break-inside: avoid; }
+      .page-break { page-break-before: always; }
+      a { color: var(--ink); text-decoration: none; }
+      .cover { min-height: 9in; page-break-after: always; }
+      .cover h1 { font-size: 52pt; }
+      .cover-sub { font-size: 16pt; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="cover">
+  <div>
+    <div class="cover-mark">A field guide — est. 2026</div>
+    <h1>Under <span class="emph">200k</span></h1>
+    <p class="cover-sub">A field guide to heavy Claude Code sessions.</p>
+  </div>
+  <div class="cover-foot">
+    <span>Fahad Noor</span>
+    <span>v1.0 · 2026</span>
+  </div>
+</section>
+
+<div class="page-break"></div>
+
+<blockquote><p>Copyright © 2026 Fahad Noor. All rights reserved. This document and its scripts are licensed for personal use by the original purchaser. Redistribution, resale, or inclusion in derivative products is prohibited.</p></blockquote>
+
+<h2>Why this exists</h2>
+<p>You already know what the 200k wall feels like. You're forty turns into a refactor, Claude has the full mental model of your codebase, and somewhere around turn forty-one the context bar goes red. Autocompact triggers. Older messages get summarized into oblivion. The file contents Claude had read earlier? Gone. The design decision you argued out three hours ago? Summarized into one line that loses the reasoning.</p>
+<p>You paste the file again. Claude thanks you and keeps working. But the thing you were building — the specific thread of intent — is now a lossy reconstruction.</p>
+<p>This guide is about not getting there. Not because hitting 200k is a moral failure — it isn't — but because most of the tokens you're burning are noise you never needed to load. The 60k MCP tools you don't use in this session. The skill descriptions that trigger on phrases you never type. The memory files that haven't been relevant for six months. The capabilities index that gets re-injected every turn.</p>
+<p>Four moves. Each grounded in something I verified against my own setup, not documentation.</p>
+<ul>
+  <li><strong>I.</strong> A context audit you can run in under two minutes.</li>
+  <li><strong>II.</strong> Where MCP sprawl actually lives.</li>
+  <li><strong>III.</strong> A response protocol enforced by a Stop-hook.</li>
+  <li><strong>IV.</strong> Verify the binary, not the docs.</li>
+</ul>
+<p>The appendix has the two scripts — statusline and Stop-hook — ready to drop into <code>~/.claude/</code>. Together they're about 200 lines.</p>
+
+<h2>How to use this guide</h2>
+<p>Read Chapter I today. Run the audit. If you're surprised by what you find (most people are), keep reading.</p>
+<p>Don't skip to the scripts without reading Chapter III. The scripts enforce a protocol that's only useful if you understand why each piece exists — otherwise you'll delete the parts that annoy you and lose the value.</p>
+<p>Every code block is meant to be copied. Every click path is the exact path. If something here doesn't match your version of Claude Code, grep the binary (Chapter IV shows you how) — don't assume I'm wrong until you've checked.</p>
+
+<div class="page-break"></div>
+
+<p class="chapter-marker">Chapter I</p>
+<h2>A context audit you can run in under two minutes</h2>
+
+<h3>What the context window actually is</h3>
+<p>The 200k token window is a shared budget across eight or nine distinct components. You don't control most of them directly. But every turn, Claude Code sends the model a prompt shaped roughly like this:</p>
+<pre><code>[system prompt from the CLI binary]
+[tool schemas — system tools like Read/Edit/Bash]
+[tool schemas — MCP tools from connectors]
+[skill definitions from ~/.claude/skills/]
+[custom agent definitions from ~/.claude/agents/]
+[CLAUDE.md files — user, project, memory index]
+[every memory file referenced by MEMORY.md]
+[the conversation transcript — every user turn, every tool call, every result]
+[the current user turn]</code></pre>
+<p>Every single one of these eats tokens. Some are fixed overhead per session. Some grow every turn. Two of them — messages and MCP tool schemas — usually account for 70–90% of what you're burning.</p>
+
+<h3>The audit checklist</h3>
+<p>Run this on a session that feels heavy. Takes 90 seconds if you know where to look.</p>
+
+<h4>1. Check the headline number.</h4>
+<p>In Claude Code, the context-window indicator is surfaced via the statusline. If you haven't installed one, skip to Appendix A and install it now, or use <code>/context</code> if your CLI version supports the slash command. You want one number: <strong>percentage of 200k used</strong>.</p>
+
+<h4>2. Break it down by component.</h4>
+<p>The <code>/context</code> command shows a per-component breakdown. Note the top three by token count. For most sessions at 50%+, the breakdown looks like:</p>
+<table>
+  <thead><tr><th>Component</th><th>Typical share at 50%</th></tr></thead>
+  <tbody>
+    <tr><td>Messages</td><td>40–60%</td></tr>
+    <tr><td>MCP tools (deferred)</td><td>15–30%</td></tr>
+    <tr><td>Autocompact buffer (reserved)</td><td>15%</td></tr>
+    <tr><td>Skills</td><td>3–8%</td></tr>
+    <tr><td>Memory files</td><td>2–6%</td></tr>
+    <tr><td>Custom agents</td><td>2–5%</td></tr>
+    <tr><td>System prompt + tools</td><td>5–8%</td></tr>
+  </tbody>
+</table>
+<p>The buffer is mandatory overhead — you can't reclaim it. Everything else is fair game.</p>
+
+<h4>3. If Messages is &gt;60%, that's the flight recorder leaking.</h4>
+<p>Long conversations accumulate tool results. Every file you had Claude read is still sitting in the transcript verbatim. Every 500-line diff. Every Bash output. The fix isn't to be more careful — the transcript is append-only. The fix is to start a new session and carry only what matters (<code>/resume</code> with pruning, or manually re-state the active subproblem).</p>
+
+<h4>4. If MCP tools is &gt;25%, Chapter II is your chapter.</h4>
+<p>Skip ahead. The fix takes five minutes and doesn't require uninstalling anything.</p>
+
+<h4>5. If Skills + Agents + Memory files combined is &gt;20%, you have declaration bloat.</h4>
+<p>Skills with vague descriptions fire on too many prompts. Custom agents you defined six months ago for a one-off task still get loaded every session. Memory files that should have been consolidated into one. Walk <code>~/.claude/skills/</code> and <code>~/.claude/agents/</code> — anything you don't recognize, rename it with a <code>.disabled</code> suffix and see if you miss it in a week.</p>
+
+<h4>6. If System tools + MCP tools (non-deferred) is your top line, rare but possible — you've enabled too many connectors.</h4>
+<p>Connectors you "might use someday" are the single biggest preventable drag. Same browser-side fix as Chapter II.</p>
+
+<h4>7. Note the autocompact-imminent threshold.</h4>
+<p>Claude Code triggers autocompact at ~92% by default. If you're at 85%, you have roughly one heavy turn before you lose context. Wrap up the current subproblem, save any key state to a memory file or plan, then start fresh.</p>
+
+<h3>The two usual suspects</h3>
+<p>Across every audit I've run on my own sessions and helped others run on theirs, the same pair dominates:</p>
+<ul>
+  <li><strong>Messages</strong> — the active transcript, which grows with every turn and can't be trimmed retroactively.</li>
+  <li><strong>MCP tool schemas</strong> — loaded once per session, but at 100k+ tokens for users with 15+ connectors enabled.</li>
+</ul>
+<p>If your audit shows something else at the top, you're an outlier and the rest of this book is less urgent for you. If it shows these two, you're normal.</p>
+
+<h3>What "under two minutes" actually means</h3>
+<p>Ninety seconds to run <code>/context</code> and read the output. Thirty seconds to mentally flag the top two. You do not need spreadsheets or screenshots. The audit is useful because it's fast enough to do mid-session when you notice the statusline turning yellow. Any slower and you won't do it.</p>
+
+<div class="page-break"></div>
+
+<p class="chapter-marker">Chapter II</p>
+<h2>Where MCP sprawl actually lives</h2>
+
+<h3>The lie of the clean settings.json</h3>
+<p>You open <code>~/.claude/settings.json</code>. It has two or three MCP servers listed. You think you have a small footprint.</p>
+<p>You run the context audit. MCP tools are 60k+ tokens.</p>
+<p>The mismatch is that Claude Code loads MCP tools from <strong>three places</strong>, not one:</p>
+<ol>
+  <li><strong>Local CLI config</strong> — <code>~/.claude/settings.json</code> (the one you edit).</li>
+  <li><strong>Plugin-bundled MCP servers</strong> — any plugin installed from the marketplace can declare its own MCP servers in its <code>plugin.json</code>. These load automatically.</li>
+  <li><strong>Browser-enabled connectors on claude.ai</strong> — this is the big one. Connectors you authorized in the browser (Notion, Google Drive, Supabase, Figma, Gmail, etc.) are available inside Claude Code too, and their tool schemas load on every session.</li>
+</ol>
+<p>That third bucket is where the real weight lives. I once audited my own setup and found 200+ MCP tools across eleven connectors I barely used.</p>
+
+<h3>The exact click path to audit + prune</h3>
+<p>This is the browser-side fix. It requires no CLI changes.</p>
+<ol>
+  <li>Open <strong>claude.ai</strong> in your browser, signed into the same account you use with Claude Code.</li>
+  <li>Top-right avatar → <strong>Settings</strong>.</li>
+  <li>Left sidebar → <strong>Connectors</strong> (sometimes labeled "Integrations" or "MCP servers" depending on rollout stage).</li>
+  <li>You'll see a list of every connector authorized on your account. For each one:
+    <ul>
+      <li>If you haven't used it in a month: <strong>Disconnect</strong>.</li>
+      <li>If you use it occasionally but not in Claude Code sessions: <strong>Disconnect for CLI</strong> (if the toggle exists) or fully disconnect and re-auth when needed.</li>
+      <li>If you use it regularly in the browser but never in Claude Code: same — disconnect for CLI only.</li>
+    </ul>
+  </li>
+  <li>After pruning, restart your Claude Code CLI (quit and reopen the terminal, or <code>/reset</code> if your version supports it). The next session's context-window audit should show a dramatic drop in MCP tool tokens.</li>
+</ol>
+
+<h3>Budget heuristic</h3>
+<p>Aim for <strong>under 20k tokens total for MCP tools</strong> in any given session. If a connector's schema is more than 5k tokens on its own, you almost certainly don't need it loaded constantly — enable it per-session only when you're doing work that touches it.</p>
+
+<h3>Deferred MCP tools</h3>
+<p>Claude Code 2.x introduced a "deferred" mode for MCP tool schemas — instead of loading all tool definitions upfront, it loads only tool names and descriptions (a small index), and fetches full schemas on-demand when Claude decides to use a tool. If your CLI version supports it, enable it. Check your settings for <code>mcp.deferred</code> or similar — the flag varies by version.</p>
+<p>The trade-off: Claude needs one extra round-trip to discover a tool's exact parameters when it first uses it. For CLI workflows that use 2–3 specific tools per session, deferred mode can save 40k+ tokens.</p>
+
+<h3>What this doesn't fix</h3>
+<p>Pruning connectors doesn't help with messages, skills, agents, or memory. Chapter I's audit tells you whether this chapter is your bottleneck. Don't prune connectors you actually need just because the number looks big — if they're earning their weight, they're earning their weight.</p>
+
+<div class="page-break"></div>
+
+<p class="chapter-marker">Chapter III</p>
+<h2>A response protocol enforced by a Stop-hook</h2>
+
+<h3>Why responses drift</h3>
+<p>The longer a Claude session runs, the more its responses drift toward one of two failure modes:</p>
+<ul>
+  <li><strong>Acknowledgment mode:</strong> responses shrink into "Done!" / "Sure!" / "On it." with no teaching, no reflection, no flag on what could go wrong.</li>
+  <li><strong>Wall-of-text mode:</strong> responses bloat into multi-section explanations of what Claude did, heavy on "what," silent on "why."</li>
+</ul>
+<p>Both modes make the session harder to review, harder to learn from, and harder to catch when Claude makes a bad judgment call. The response protocol fixes both by forcing a specific structure on every non-trivial response.</p>
+
+<h3>The five mandatory sections</h3>
+<p>Every response over roughly 400 characters ends with these subheaders, in order:</p>
+
+<h4>### Under the hood</h4>
+<p>Teach the <em>why</em> behind this turn's non-obvious choices. Not a recap of what was done — a teaching of why. One-sentence reasons for tool selection, design trade-offs, ordering. Written so the reader could re-teach it to someone else.</p>
+<p><strong>Why this exists:</strong> most drift toward "what" and away from "why" because "why" is harder to generate. Forcing the section costs a sentence and saves hours of post-hoc debugging ("why did Claude pick X?"). Cap at 100 words.</p>
+
+<h4>### Harshest critic</h4>
+<p>Name specific weaknesses in <em>this</em> response with a counterfactual — "if I had done X instead of Y, outcome would have been Z." No performative humility ("I could have been clearer"). Real failure modes, named.</p>
+<p><strong>Why this exists:</strong> Claude is biased toward confidence. The section creates structural space to surface doubt, so the human can catch mistakes Claude would otherwise gloss over. Cap at 100 words.</p>
+
+<h4>### Score</h4>
+<p>Format: <code>Score: X/5 — &lt;one-line improvement note&gt;</code>.</p>
+<p><strong>Why this exists:</strong> a numerical self-assessment across turns makes it possible to spot sessions where Claude's own confidence is drifting down. When several turns in a row score 2/5 or 3/5, that's a signal to stop, reset context, or switch tactics.</p>
+
+<h4>### Scalable paths</h4>
+<p>One to three bullets, each tagged one of <code>[EXECUTE]</code>, <code>[DEFER: &lt;unblocker&gt;]</code>, <code>[REJECT: &lt;reason&gt;]</code>, or <code>[PROPOSE: &lt;reason&gt;]</code>.</p>
+<ul>
+  <li><code>[EXECUTE]</code> — done in this turn before emitting.</li>
+  <li><code>[DEFER]</code> — not done this turn because of a specific named blocker (credentials missing, user confirmation needed, dependency on another step).</li>
+  <li><code>[REJECT]</code> — considered and rejected, with the reason named.</li>
+  <li><code>[PROPOSE]</code> — worth considering, not blocked, not declined, but not autonomously actionable.</li>
+</ul>
+<p><strong>Why this exists:</strong> forces Claude to separate what was done, what's next, and what was considered and dismissed. Makes it possible to audit "did Claude explore alternatives" without asking.</p>
+
+<h4>### Capabilities — <em>optional</em></h4>
+<p>Only present when at least one of Skills / Agents / Connectors / Plugins was actually used. Lists them as <code>[USING: name]</code> for active use or <code>[PROPOSED: name]</code> for a suggestion. If all four rows would be empty, the block is omitted entirely.</p>
+<p><strong>Why this exists:</strong> the inverse of tool-selection drift. If Claude is always using the same three skills, the session is leaving leverage on the table. The block makes that visible.</p>
+
+<h3>The Stop-hook script</h3>
+<p>This is the script that enforces the protocol. Drop it at <code>~/.claude/hooks/response-protocol.sh</code> (macOS/Linux) and register it in <code>settings.json</code> under the <code>hooks.Stop</code> key.</p>
+<p>Full script in <strong>Appendix B</strong>. The core logic:</p>
+<ol>
+  <li>On every Stop event, Claude Code runs the hook.</li>
+  <li>The hook reads the session transcript, finds the last assistant message.</li>
+  <li>If the message is under 400 chars, skip — short responses (yes/no/acknowledgments) are exempt.</li>
+  <li>Otherwise, grep for each of the five required subheaders.</li>
+  <li>If any are missing, emit a reminder to stdout. Claude Code surfaces hook stdout as additional context on the next turn — so the next response will see the reminder and self-correct.</li>
+</ol>
+<p>The hook is <strong>non-blocking</strong>. It never exits non-zero, never mutates the transcript. It just nudges.</p>
+
+<h3>How to install</h3>
+<pre><code># 1. Copy the script into the hooks directory
+mkdir -p ~/.claude/hooks
+# (paste the script from Appendix B, make it executable)
+chmod +x ~/.claude/hooks/response-protocol.sh
+
+# 2. Register in settings.json
+# Open ~/.claude/settings.json and add (or merge into existing hooks):</code></pre>
+<pre><code>{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          { "type": "command", "command": "bash $HOME/.claude/hooks/response-protocol.sh" }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+<p>The <code>matcher: ""</code> means "every Stop event." If you want to scope it narrower (e.g., only certain projects), use a regex matching the session's working directory.</p>
+
+<h3>Failure modes to expect</h3>
+<ul>
+  <li><strong>First few turns feel heavy.</strong> The protocol adds ~300–500 tokens per response. Worth it.</li>
+  <li><strong>Short responses stay short.</strong> The 400-char exemption means "yes," "proceed," "done" don't get badgered.</li>
+  <li><strong>Claude occasionally cheats.</strong> Early on, Claude may write minimal <code>### Under the hood</code> sections that restate what was done instead of teaching the why. The fix is to call it out in conversation ("your under-the-hood is a recap, not a teaching"). It self-corrects within one or two turns.</li>
+  <li><strong>The hook doesn't know about sarcasm.</strong> If Claude writes <code>### Harshest critic</code> as one performative line of fake humility, the hook will still pass it. The protocol only works if you read the critic section and push back when it's weak.</li>
+</ul>
+
+<h3>The &lt;100 words rule</h3>
+<p>Sections 1 and 2 (<code>Under the hood</code> and <code>Harshest critic</code>) are capped at 100 words each. Without the cap, they drift toward multi-paragraph essays. The cap forces the writer to lead with the sharp point.</p>
+
+<div class="page-break"></div>
+
+<p class="chapter-marker">Chapter IV</p>
+<h2>Verify the binary, not the docs</h2>
+
+<h3>Why docs lag</h3>
+<p>Claude Code ships weekly. Documentation ships quarterly. The CLI you installed yesterday has fields, flags, and hook events that don't appear in the public docs yet.</p>
+<p>Trusting docs over the binary means:</p>
+<ul>
+  <li>You build a statusline that uses the pre-2.0 statusline schema, and it silently fails on the new <code>context_window.used_percentage</code> field.</li>
+  <li>You write a hook against a deprecated event name.</li>
+  <li>You recommend a config key that was renamed three releases ago.</li>
+</ul>
+<p>The fix is a sixty-second pattern that works on any npm/brew/pip-installed CLI.</p>
+
+<h3>The 60-second grep pattern</h3>
+<pre><code># 1. Find where the CLI is actually installed
+which claude                                   # returns the binary path
+# or for npm globals:
+npm ls -g --depth=0 --parseable | grep claude  # returns the package path
+
+# 2. Find the bundled JS (most Node CLIs bundle to a single file)
+ls -la "$(dirname $(which claude))/../lib/node_modules/@anthropic-ai/claude-code/" 2>/dev/null
+# or on Windows:
+# dir "C:\Users\$env:USERNAME\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code"
+
+# 3. Grep for the feature you care about
+grep -n "context_window" cli.js | head -20
+grep -n "statusLine" cli.js | head -20
+grep -n "used_percentage" cli.js | head -20</code></pre>
+<p>Step 3 gives you field names, nested paths, and default values directly from the shipped code. If the docs say "the statusline receives <code>model_info.name</code>" but grep shows <code>model.display_name</code>, trust grep.</p>
+
+<h3>Walk-through: finding <code>context_window.used_percentage</code></h3>
+<p>The Claude Code statusline docs, as of early 2026, describe the stdin schema as including <code>model</code>, <code>workspace</code>, <code>cost</code>, and a few other fields. Context window usage isn't documented.</p>
+<p>But it's there. From <code>cli.js</code> in the bundled CLI (verified against 2.1.109):</p>
+<pre><code>context_window.used_percentage
+context_window.remaining_percentage
+context_window.current_usage
+context_window.context_window_size
+exceeds_200k_tokens</code></pre>
+<p>These are the fields that let you build a red/yellow/green context indicator without guessing. The statusline script in <strong>Appendix A</strong> uses exactly these fields.</p>
+
+<h3>Why this matters beyond statuslines</h3>
+<p>The same pattern works for:</p>
+<ul>
+  <li><strong>Hook event names.</strong> The docs list five or six. Grep shows there are eleven or twelve, including undocumented ones useful for advanced workflows.</li>
+  <li><strong>Tool-result shape.</strong> When you write a custom agent or skill that needs to parse tool output, grep the code that generates it.</li>
+  <li><strong>Config key names.</strong> <code>settings.json</code> has more valid keys than the docs list — grep for <code>config.</code> or the getter functions.</li>
+  <li><strong>Any third-party CLI.</strong> The same trick works on <code>gh</code>, <code>supabase</code>, <code>doppler</code>, <code>gcloud</code>. Pip and brew installs are even easier — the source is almost always right there, un-minified.</li>
+</ul>
+
+<h3>The sixty-second rule</h3>
+<p>If you're about to spend more than a minute reasoning about what a CLI tool might support, stop reasoning and grep. The answer is in the binary, not in your head and not in the docs.</p>
+
+<div class="page-break"></div>
+
+<p class="chapter-marker">Appendix A</p>
+<h2>The statusline script</h2>
+<p>Drop this at <code>~/.claude/hooks/statusline.sh</code>, make it executable, and register it in <code>settings.json</code> under the <code>statusLine.command</code> key.</p>
+<pre><code>#!/usr/bin/env bash
+# Claude Code statusLine (CLI 2.1.x). Reads session JSON on stdin.
+# Schema verified against bundled cli.js 2.1.109:
+#   model.display_name, workspace.current_dir, output_style.name,
+#   cost.total_cost_usd,
+#   context_window.{used_percentage, remaining_percentage, current_usage, context_window_size},
+#   exceeds_200k_tokens.
+
+set -u
+JSON="$(cat)"
+get() { printf '%s' "$JSON" | jq -r "$1 // empty" 2>/dev/null; }
+
+MODEL=$(get '.model.display_name')
+DIR=$(get '.workspace.current_dir')
+COST=$(get '.cost.total_cost_usd')
+USED_PCT=$(get '.context_window.used_percentage')
+OVER=$(get '.exceeds_200k_tokens')
+
+BASE="${DIR##*/}"; [[ -z "$BASE" ]] && BASE="$DIR"
+
+# Context indicator — prefer real %, fall back to 200k boolean.
+CTX="🟢"
+if [[ -n "$USED_PCT" && "$USED_PCT" != "null" ]]; then
+  PCT_INT=$(printf '%.0f' "$USED_PCT" 2>/dev/null || echo "")
+  if [[ "$PCT_INT" =~ ^[0-9]+$ ]]; then
+    if   (( PCT_INT >= 85 )); then CTX="🔴 ${PCT_INT}%"
+    elif (( PCT_INT >= 65 )); then CTX="🟡 ${PCT_INT}%"
+    else                           CTX="🟢 ${PCT_INT}%"
+    fi
+  fi
+elif [[ "$OVER" == "true" ]]; then
+  CTX="🔴 &gt;200k"
+fi
+
+COST_STR=""
+[[ -n "$COST" ]] &amp;&amp; COST_STR=$(printf '$%.3f' "$COST" 2&gt;/dev/null || echo "\$$COST")
+
+printf '%s | %s | %s' "${MODEL:-?}" "$BASE" "$CTX"
+[[ -n "$COST_STR" ]] &amp;&amp; printf ' | %s' "$COST_STR"</code></pre>
+
+<h3>Installation</h3>
+<pre><code>chmod +x ~/.claude/hooks/statusline.sh</code></pre>
+<p>Then in <code>~/.claude/settings.json</code>:</p>
+<pre><code>{
+  "statusLine": {
+    "type": "command",
+    "command": "bash $HOME/.claude/hooks/statusline.sh"
+  }
+}</code></pre>
+<p>Restart your terminal. Every Claude Code session will now show:</p>
+<pre><code>Opus 4.7 | your-project | 🟢 32% | $0.470</code></pre>
+<p>Thresholds: green 0–64%, yellow 65–84%, red 85%+. Tune in the script by editing the two <code>if (( PCT_INT &gt;= X ))</code> lines.</p>
+
+<h3>Windows PowerShell variant</h3>
+<p>If you're on Windows without WSL, translate the script to PowerShell. The key moves:</p>
+<pre><code># ~/.claude/hooks/statusline.ps1
+$json = [Console]::In.ReadToEnd() | ConvertFrom-Json
+$model = $json.model.display_name
+$dir = Split-Path -Leaf $json.workspace.current_dir
+$pct = [int]$json.context_window.used_percentage
+$cost = $json.cost.total_cost_usd
+
+$ctx = if ($pct -ge 85) { "🔴 $pct%" } elseif ($pct -ge 65) { "🟡 $pct%" } else { "🟢 $pct%" }
+"$model | $dir | $ctx | `$$([math]::Round($cost,3))"</code></pre>
+<p>Register in <code>settings.json</code>:</p>
+<pre><code>{
+  "statusLine": {
+    "type": "command",
+    "command": "pwsh -File $HOME/.claude/hooks/statusline.ps1"
+  }
+}</code></pre>
+<p><strong>Note:</strong> use <code>pwsh.exe</code> (PowerShell 7), not <code>powershell.exe</code> (PowerShell 5.1) — 5.1 has tokenizer edge cases that break some scripts.</p>
+
+<div class="page-break"></div>
+
+<p class="chapter-marker">Appendix B</p>
+<h2>The Stop-hook script</h2>
+<p>Drop this at <code>~/.claude/hooks/response-protocol.sh</code>. The full script:</p>
+<pre><code>#!/usr/bin/env bash
+# Stop hook — Layer A enforcement of the Response Protocol.
+# Reads the session transcript, inspects the last assistant message, and if the
+# canonical footer is missing, emits a reminder that Claude Code will surface as
+# additional context on the next turn.
+#
+# Non-blocking: never exits non-zero, never mutates the transcript. Just nudges.
+
+set -u
+LOG="$HOME/.claude/response-protocol.log"
+mkdir -p "$(dirname "$LOG")"
+
+TS="$(date -Iseconds)"
+SID="${CLAUDE_SESSION_ID:-unknown}"
+
+HOOK_PAYLOAD="$(cat)"
+
+TRANSCRIPT=""
+if command -v jq &gt;/dev/null 2&gt;&amp;1; then
+  TRANSCRIPT="$(echo "$HOOK_PAYLOAD" | jq -r '.transcript_path // empty' 2&gt;/dev/null)"
+fi
+
+log() { printf '%s\tresponse-protocol\t%s\t%s\n' "$TS" "$SID" "$1" &gt;&gt; "$LOG"; }
+
+if [[ -z "$TRANSCRIPT" || ! -f "$TRANSCRIPT" ]]; then
+  log "no-transcript"
+  exit 0
+fi
+
+LAST_ASSISTANT=""
+if command -v jq &gt;/dev/null 2&gt;&amp;1; then
+  LAST_ASSISTANT="$(tac "$TRANSCRIPT" 2&gt;/dev/null | while IFS= read -r line; do
+    role="$(echo "$line" | jq -r '.role // .message.role // empty' 2&gt;/dev/null)"
+    if [[ "$role" == "assistant" ]]; then
+      echo "$line" | jq -r '..|.text? // empty' 2&gt;/dev/null | tr '\n' ' '
+      break
+    fi
+  done)"
+fi
+
+# Short responses are exempt
+LEN=${#LAST_ASSISTANT}
+if [[ $LEN -lt 400 ]]; then
+  log "short-exempt:$LEN"
+  exit 0
+fi
+
+HAS_SCORE=0; HAS_PATHS=0; HAS_UNDER_HOOD=0; HAS_CRITIC=0
+
+echo "$LAST_ASSISTANT" | grep -Eiq 'Score[[:space:]]*:[[:space:]]*[1-5][[:space:]]*/[[:space:]]*5' &amp;&amp; HAS_SCORE=1
+
+if echo "$LAST_ASSISTANT" | grep -Eiq '(More scalable paths|Scalable paths)[[:space:]]*:?' \
+   &amp;&amp; echo "$LAST_ASSISTANT" | grep -Eq '\[(EXECUTE|DEFER|REJECT|PROPOSE)'; then
+  HAS_PATHS=1
+fi
+
+echo "$LAST_ASSISTANT" | grep -Eiq '###[[:space:]]+Under the hood' &amp;&amp; HAS_UNDER_HOOD=1
+echo "$LAST_ASSISTANT" | grep -Eiq '###[[:space:]]+Harshest critic' &amp;&amp; HAS_CRITIC=1
+
+if [[ $HAS_SCORE -eq 1 &amp;&amp; $HAS_PATHS -eq 1 &amp;&amp; $HAS_UNDER_HOOD -eq 1 &amp;&amp; $HAS_CRITIC -eq 1 ]]; then
+  log "ok"
+  exit 0
+fi
+
+MISSING=""
+[[ $HAS_UNDER_HOOD -eq 0 ]] &amp;&amp; MISSING+="'### Under the hood' section "
+[[ $HAS_CRITIC -eq 0 ]] &amp;&amp; MISSING+="'### Harshest critic' section "
+[[ $HAS_SCORE -eq 0 ]] &amp;&amp; MISSING+="'### Score' X/5 footer "
+[[ $HAS_PATHS -eq 0 ]] &amp;&amp; MISSING+="'### Scalable paths' tagged bullets "
+
+log "missing:${MISSING// /_}"
+cat &lt;&lt;REMINDER
+
+🧭 [response-protocol] Your last response omitted: ${MISSING}.
+Per the response protocol, every response ≥400 chars MUST end with:
+
+  ### Under the hood
+  ### Harshest critic
+  ### Score
+  ### Scalable paths
+
+Apply this to your next response automatically.
+REMINDER
+exit 0</code></pre>
+
+<h3>Installation</h3>
+<pre><code>chmod +x ~/.claude/hooks/response-protocol.sh</code></pre>
+<p>Add to <code>~/.claude/settings.json</code>:</p>
+<pre><code>{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          { "type": "command", "command": "bash $HOME/.claude/hooks/response-protocol.sh" }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+
+<h3>What the script does NOT do</h3>
+<ul>
+  <li>It doesn't grade the quality of your <code>Under the hood</code> or <code>Harshest critic</code> sections. You have to push back on weak writing yourself.</li>
+  <li>It doesn't enforce word limits. The 100-word cap on sections 1 and 2 is a discipline, not a machine-enforced rule.</li>
+  <li>It doesn't require the optional <code>### Capabilities</code> block — but if you want that check, extend the script yourself.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h2>Closing</h2>
+<p>You bought this because you hit a wall that shouldn't exist. It doesn't have to.</p>
+<p>The audit takes 90 seconds. The MCP prune takes 5 minutes. The protocol pays for itself within an hour. The binary-grep pattern is a sixty-second rule you can apply to any CLI tool for the rest of your career.</p>
+<p>If something here doesn't match your experience, grep the binary. Don't email me until you've done the grep — nine times out of ten, the answer is in there and you'll catch a thing the docs got wrong.</p>
+<p>If the grep shows something the docs are actively lying about, that's worth an email. Send it to <code>fahad.mnoor97@gmail.com</code> with the exact file path, line number, and the claim it contradicts.</p>
+<p style="margin-top:40px; font-style:italic; font-family: var(--serif); font-size:18px;">— F</p>
+
+</body>
+</html>
